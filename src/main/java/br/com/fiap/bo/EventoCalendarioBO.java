@@ -67,6 +67,12 @@ public class EventoCalendarioBO {
     public void atualizarEventoCalendarioBO(EventoCalendario eventoCalendario) throws SQLException, ClassNotFoundException {
         eventoCalendarioDAO = new EventoCalendarioDAO();
         try {
+            if (eventoCalendario.getTitulo().isEmpty()){
+                eventoCalendario.setTitulo(eventoCalendarioDAO.selecionarEventosCalendarioPorId(conexao, eventoCalendario.getId()).getTitulo());
+            }
+            if (eventoCalendario.getDescricao().isEmpty()){
+                eventoCalendario.setDescricao(eventoCalendarioDAO.selecionarEventosCalendarioPorId(conexao, eventoCalendario.getId()).getDescricao());
+            }
             eventoCalendarioDAO.atualizarEventoCalendario(conexao, eventoCalendario);
         } catch (Exception e) {
             if (e instanceof SQLException sqlExcecao){

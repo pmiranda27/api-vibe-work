@@ -65,6 +65,24 @@ public class EventoCalendarioDAO {
         return listaEventos;
     }
 
+    public EventoCalendario selecionarEventosCalendarioPorId(Connection conexao, int id_evento) throws SQLException {
+        EventoCalendario eventoCalendario = new EventoCalendario();
+        PreparedStatement stmt = conexao.prepareStatement("select * from Evento_Calendario where id_evento_calendario = ?");
+
+        stmt.setInt(1, id_evento);
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            eventoCalendario.setId(rs.getInt(1));
+            eventoCalendario.setTitulo(rs.getString(2));
+            eventoCalendario.setData(rs.getTimestamp(3));
+            eventoCalendario.setDescricao(rs.getString(4));
+
+            eventoCalendario.setUsuario(usuarioDAO.selecionarUsuarioPorId(conexao, rs.getInt(5)));
+        }
+        return eventoCalendario;
+    }
+
     public int criarEventoCalendario (Connection conexao, EventoCalendario eventoCalendario) throws SQLException {
         int novoId = gerarNovoId(conexao);
 
