@@ -1,7 +1,6 @@
 package br.com.fiap;
 
 import br.com.fiap.beans.RotinaSemanal;
-import br.com.fiap.beans.Usuario;
 import br.com.fiap.bo.RotinaSemanalBO;
 import br.com.fiap.excecoes.RequestsExcecoes;
 import jakarta.ws.rs.*;
